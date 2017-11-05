@@ -114,10 +114,10 @@ if(!isset($_SESSION['username'])){
                 <div class="table-responsive">
                      <table class="table table-bordered">
                           <tr>
-                               <th width="40%">ITEM NAME</th>
+                               <th width="35%">ITEM NAME</th>
                                <th width="10%">QUANTITY</th>
                                <th width="20%">PRICE</th>
-                               <th width="15%">TOTAL</th>
+                               <th width="20%">TOTAL</th>
                                <th width="5%">ACTION</th>
                           </tr>
                           <?php
