@@ -72,7 +72,7 @@ if(!isset($_SESSION['username'])){
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
      <!-- master css -->
-     <link rel="stylesheet" href="assets/master.css">
+     <link rel="stylesheet" href="scripts/master.css">
      </head>
       <body>
            <br />
@@ -130,8 +130,8 @@ if(!isset($_SESSION['username'])){
                           <tr>
                                <td><?php echo $values["item_name"]; ?></td>
                                <td><?php echo $values["item_quantity"]; ?></td>
-                               <td>$ <?php echo $values["item_price"]; ?></td>
-                               <td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
+                               <td>Tsh <?php echo $values["item_price"]; ?></td>
+                               <td>Tsh <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
                                <td><a href="home.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
                           </tr>
                           <?php
@@ -140,7 +140,7 @@ if(!isset($_SESSION['username'])){
                           ?>
                           <tr>
                                <td colspan="3" align="right">Total</td>
-                               <td align="right">$ <?php echo number_format($total, 2); ?></td>
+                               <td align="right">Tsh <?php echo number_format($total, 2); ?></td>
                                <td></td>
                           </tr>
                           <?php
