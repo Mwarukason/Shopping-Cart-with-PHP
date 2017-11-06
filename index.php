@@ -104,7 +104,7 @@ if(isset($_POST['btn-login'])){
               <div class="item active">
                 <img src="images/cable.jpg" alt="New York" width="100%" height="100%">
                 <div class="carousel-caption">
-                  <h3>New York</h3>
+                  <h3>Mission</h3>
                   <p>WHEN IT COMES TO THE INSTALLATION, CONFIGURATION AND COMMISSIONING OF NEW HARDWARE AND SOFTWARE SYSTEMS, EXPERIENCE AND A PROVEN TRACK RECORD COUNTS</p>
                 </div>
               </div>
@@ -112,7 +112,7 @@ if(isset($_POST['btn-login'])){
               <div class="item">
                 <img src="images/hardware.jpg" alt="Chicago" width="100%" height="100%">
                 <div class="carousel-caption">
-                  <h3>Chicago</h3>
+                  <h3>Vission</h3>
                   <p>WHEN IT COMES TO THE INSTALLATION, CONFIGURATION AND COMMISSIONING OF NEW HARDWARE AND SOFTWARE SYSTEMS, EXPERIENCE AND A PROVEN TRACK RECORD COUNTS..</p>
                 </div>
               </div>
@@ -120,7 +120,7 @@ if(isset($_POST['btn-login'])){
               <div class="item">
                 <img src="images/servers.jpg" alt="Los Angeles" width="100%" height="100%">
                 <div class="carousel-caption">
-                  <h3>LA</h3>
+                  <h3>Company Goal</h3>
                   <p>WE ARE EXPERTS IN DESIGNING, BUILDING AND DELIVERING BUSINESS-DRIVEN TECHNOLOGY SOLUTIONS.</p>
                 </div>
               </div>

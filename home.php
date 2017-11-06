@@ -88,8 +88,10 @@ if(!isset($_SESSION['username'])){
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="index.php">Home</a></li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="logout.php"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                  <li><a><span class="glyphicon glyphicon-user"></span><strong> <?php  echo $_SESSION['username']; ?></strong></a></li>
+                  <li><a href="logout.php"><span ></span><strong>Logout</strong></a></li>
                 </ul>
               </div>
         </nav>
@@ -147,17 +149,17 @@ if(!isset($_SESSION['username'])){
                           <tr>
                                <td><?php echo $values["item_name"]; ?></td>
                                <td><?php echo $values["item_quantity"]; ?></td>
-                               <td>Tsh <?php echo $values["item_price"]; ?></td>
-                               <td>Tsh <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
+                               <td align="right">Tsh <?php echo $values["item_price"]; ?></td>
+                               <td align="right">Tsh <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
                                <td><a href="home.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
-                          </tr>
+                          </tr align="right">
                           <?php
                                     $total = $total + ($values["item_quantity"] * $values["item_price"]);
                                }
                           ?>
                           <tr>
                                <td colspan="3" align="right">Total</td>
-                               <td align="right">Tsh <?php echo number_format($total, 2); ?></td>
+                               <td colspan="1" align="right">Tsh <?php echo number_format($total, 2); ?></td>
                                <td></td>
                           </tr>
                           <?php
