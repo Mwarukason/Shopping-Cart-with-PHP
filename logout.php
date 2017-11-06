@@ -1,12 +1,7 @@
 <?php
+session_start();
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'shopcart_table';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if(!$conn){
-    echo 'DB Connection Error '.mysqli_connect_error();
-}
+unset($_SESSION['username']);
+session_unset();
+session_destroy();
+header('location:index.php');

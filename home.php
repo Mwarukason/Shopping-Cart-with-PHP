@@ -67,17 +67,34 @@ if(!isset($_SESSION['username'])){
      <!-- Required meta tags -->
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
 
      <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
      <!-- master css -->
      <link rel="stylesheet" href="scripts/master.css">
      </head>
       <body>
+        <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Softnet Shopping Cart</a>
+                </div>
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="index.php">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="logout.php"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                </ul>
+              </div>
+        </nav>
            <br />
            <div class="container contner">
-                <a href="logout.php">Logout</a>
                 <h3 align="center">Welcome To Shopping Cart</h3><br />
                 <div class="row">
                 <?php
@@ -98,7 +115,7 @@ if(!isset($_SESSION['username'])){
                                    <input type="text" name="quantity" class="form-control" value="1" />
                                    <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>" />
                                    <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>" />
-                                   <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
+                                   <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add To Cart" />
                               </div>
                          </form>
                     </div>
@@ -110,7 +127,7 @@ if(!isset($_SESSION['username'])){
                 </div>
                 <div style="clear:both"></div>
                 <br />
-                <h3>Order Details</h3>
+                <h3>DETAILS ORDER: </h3>
                 <div class="table-responsive">
                      <table class="table table-bordered">
                           <tr>
@@ -150,6 +167,9 @@ if(!isset($_SESSION['username'])){
                 </div>
            </div>
            <br />
+           <footer class="modal-footer" style="background-color:#080808;">
+               <center><strong ><p style="color:white">Developed By <a href="https://github.com/Mwarukason">Amri Shabani Mwaruka (mwarukason)</a></p></strong></center>
+           </footer>
       </body>
 
       <!-- Optional JavaScript -->

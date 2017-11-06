@@ -11,3 +11,14 @@
 .contner{
   width:800px;
 }
+.bg-footer {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  /*.container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }*/
+.bg{
+  background-color: #080808;
+}

@@ -1,66 +1,64 @@
 <?php
+session_start();
 include_once('dbcon.php');
 
 $error = false;
-if(isset($_POST['btn-register'])){
-    //clean user input to prevent sql injection
-    $username = $_POST['username'];
-    $username = strip_tags($username);
-    $username = htmlspecialchars($username);
+if(isset($_POST['btn-login'])){
+    $email = trim($_POST['email']);
+    $email = htmlspecialchars(strip_tags($email));
 
-    $email = $_POST['email'];
-    $email = strip_tags($email);
-    $email = htmlspecialchars($email);
+    $password = trim($_POST['password']);
+    $password = htmlspecialchars(strip_tags($password));
 
-    $password = $_POST['password'];
-    $password = strip_tags($password);
-    $password = htmlspecialchars($password);
-
-    //input validation
-    if(empty($username)){
+    if(empty($email)){
         $error = true;
-        $errorUsername = 'Please input username';
-    }
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $errorEmail = 'Please enter email';
+    # email validation
+    }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $error = true;
-        $errorEmail = 'Please a valid input email';
+        $errorEmail = 'Please enter a valid email address';
     }
+
     if(empty($password)){
         $error = true;
-        $errorPassword = 'Please password';
-    }elseif(strlen($password) < 6){
+        $errorPassword = 'Please enter password';
+
+    #limit password at least 6 characters
+    }elseif(strlen($password)< 6){
         $error = true;
-        $errorPassword = 'Password must at least 6 characters';
+        $errorPassword = 'Password at least 6 character';
     }
 
-    //encrypt password with md5
-    $password = md5($password);
-
-    //insert data if no error
     if(!$error){
-        $sql = "insert into users_table(username, email ,password)
-                values('$username', '$email', '$password')";
-        if(mysqli_query($conn, $sql)){
-            $successMsg = 'Register successfully. <a href="index.php">click here to login</a>';
+
+        # encrypt password into md5
+        $password = md5($password);
+        # retrieving data from DB users_table
+        $sql = "select * from users_table where email='$email' ";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($result);
+        $row = mysqli_fetch_assoc($result);
+        # check for authentication of user inside DB & Entered data
+        if($count==1 && $row['password'] == $password){
+            $_SESSION['username'] = $row['username'];
+            # redirect user to home page for valid authentcated user
+            header('location: home.php');
         }else{
-            echo 'Error '.mysqli_error($conn);
+            $errorMsg = 'Invalid Username or Password';
         }
     }
-
 }
-
 ?>
 
 
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Softnet | Register</title>
+    <title>Softnet || Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -70,45 +68,40 @@ if(isset($_POST['btn-register'])){
 
     <!-- master css -->
     <link rel="stylesheet" href="scripts/master.css">
+
   </head>
   <body>
-    <!-- navigation bar -->
     <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="index.php">Softnet Shopping Cart</a>
+              <a class="navbar-brand" href="#">Softnet Shopping Cart</a>
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="index.php">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             </ul>
           </div>
     </nav>
     <div class="container">
         <div style="width: 500px; margin: 50px auto;">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-                <center><h2>Register</h2></center>
+                <center><h2>Login</h2></center>
                 <hr/>
                 <?php
-                    if(isset($successMsg)){
-                 ?>
-                        <div class="alert alert-success">
+                    if(isset($errorMsg)){
+                        ?>
+                        <div class="alert alert-danger">
                             <span class="glyphicon glyphicon-info-sign"></span>
-                            <?php echo $successMsg; ?>
+                            <?php echo $errorMsg; ?>
                         </div>
-                <?php
+                        <?php
                     }
                 ?>
                 <div class="form-group">
-                  <label for="username" class="control-label">Username</label>
-                  <input type="text" name="username" class="form-control" autocomplete="off">
-                  <span class="text-danger"><?php if(isset($errorUsername)) echo $errorUsername; ?></span>
-                </div>
-                <div class="form-group">
                     <label for="email" class="control-label">Email</label>
-                    <input type="email" name="email" class="form-control" autocomplete="off">
+                    <input type="email" name="email" class="form-control" autocomplete="off" required>
                     <span class="text-danger"><?php if(isset($errorEmail)) echo $errorEmail; ?></span>
                 </div>
                 <div class="form-group">
@@ -117,16 +110,17 @@ if(isset($_POST['btn-register'])){
                     <span class="text-danger"><?php if(isset($errorPassword)) echo $errorPassword; ?></span>
                 </div>
                 <div class="form-group">
-                    <center><input type="submit" name="btn-register" value="Register" class="btn btn-primary"></center>
+                    <center><input type="submit" name="btn-login" value="Login" class="btn btn-primary"></center>
                 </div>
                 <hr/>
-                <a href="index.php">Login</a>
+                <a href="register.php">Register</a>
             </form>
         </div>
     </div>
-    <footer class="modal-footer">
-        <center><p>Developed By <a href="https://github.com/Mwarukason">Amri Shabani Mwaruka (mwarukason)</a></p></center>
+   <footer class="modal-footer">
+        <center><p style="margin-top:60px;">Developed By <a href="https://github.com/Mwarukason">Amri Shabani Mwaruka (mwarukason)</a></p></center>
     </footer>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
